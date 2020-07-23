@@ -4,10 +4,10 @@ import br.com.design.patterns.Orcamento;
 
 public class CalculadorDeImpostos {
 
-	public void realizaCalculo(Orcamento orcamento, Imposto imposto) {
+	public double realizaCalculo(Orcamento orcamento, Imposto imposto) {
 
 		double valor = imposto.calcula(orcamento);
-		System.out.println(valor);
+		return valor;
 
 	}
 }

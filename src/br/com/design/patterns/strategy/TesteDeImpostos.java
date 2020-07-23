@@ -1,10 +1,14 @@
 package br.com.design.patterns.strategy;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import br.com.design.patterns.Orcamento;
 
 public class TesteDeImpostos {
 
-	public static void main(String[] args) {
+	@Test
+	public void main() {
 		Imposto iss = new ISS();
 		Imposto icms = new ICMS();
 
@@ -12,10 +16,16 @@ public class TesteDeImpostos {
 
 		CalculadorDeImpostos calculador = new CalculadorDeImpostos();
 
+		double calculoEsperadoISS = 30.0;
+		double calculoEsperadoICMS = 75.0;
+		
 		// Calculando o ISS
-		calculador.realizaCalculo(orcamento, iss);
-
+		double calculoISS = calculador.realizaCalculo(orcamento, iss);
+		
 		// Calculando o ICMS
-		calculador.realizaCalculo(orcamento, icms);
+		double calculoICMS = calculador.realizaCalculo(orcamento, icms);
+		
+		Assert.assertEquals(calculoEsperadoISS, calculoISS, 0.00001);
+		Assert.assertEquals(calculoEsperadoICMS, calculoICMS, 0.00001);
 	}
 }
