@@ -25,6 +25,9 @@ public class TesteDeImpostos {
 		// Calculando o ICMS
 		double calculoICMS = calculador.realizaCalculo(orcamento, icms);
 		
+		System.out.println("calculoISS: " + calculoISS);
+		System.out.println("calculoICMS: " + calculoICMS);
+		
 		Assert.assertEquals(calculoEsperadoISS, calculoISS, 0.00001);
 		Assert.assertEquals(calculoEsperadoICMS, calculoICMS, 0.00001);
 	}
