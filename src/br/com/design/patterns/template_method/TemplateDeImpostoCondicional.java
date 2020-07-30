@@ -1,16 +1,16 @@
 package br.com.design.patterns.template_method;
 
+import br.com.design.patterns.Imposto;
 import br.com.design.patterns.Orcamento;
-import br.com.design.patterns.strategy.Imposto;
 
-public abstract class TemplateDeImpostoCondicional implements Imposto{
+public abstract class TemplateDeImpostoCondicional extends Imposto{
 
 	@Override
 	public double calcula(Orcamento orcamento) {
 		if(deveUsarMaximaTaxacao(orcamento)) {
-			return maximaTaxacao(orcamento);
+			return maximaTaxacao(orcamento) + calculoDoOutroImposto(orcamento);
 		} else {
-			return minimaTaxacao(orcamento);			
+			return minimaTaxacao(orcamento) + calculoDoOutroImposto(orcamento);			
 		}
 	}
 

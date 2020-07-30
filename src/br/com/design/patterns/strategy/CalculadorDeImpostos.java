@@ -1,5 +1,6 @@
 package br.com.design.patterns.strategy;
 
+import br.com.design.patterns.Imposto;
 import br.com.design.patterns.Orcamento;
 
 public class CalculadorDeImpostos {

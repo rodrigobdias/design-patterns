@@ -3,6 +3,7 @@ package br.com.design.patterns.strategy;
 import org.junit.Assert;
 import org.junit.Test;
 
+import br.com.design.patterns.Imposto;
 import br.com.design.patterns.Orcamento;
 
 public class TesteDeImpostos {
@@ -17,7 +18,7 @@ public class TesteDeImpostos {
 		CalculadorDeImpostos calculador = new CalculadorDeImpostos();
 
 		double calculoEsperadoISS = 30.0;
-		double calculoEsperadoICMS = 75.0;
+		double calculoEsperadoICMS = 50.0;
 		
 		// Calculando o ISS
 		double calculoISS = calculador.realizaCalculo(orcamento, iss);
