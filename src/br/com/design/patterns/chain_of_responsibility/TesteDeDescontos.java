@@ -3,6 +3,7 @@ package br.com.design.patterns.chain_of_responsibility;
 import org.junit.Assert;
 import org.junit.Test;
 
+import br.com.design.patterns.Item;
 import br.com.design.patterns.Orcamento;
 
 public class TesteDeDescontos {

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import br.com.design.patterns.chain_of_responsibility.Item;
-
 public class Orcamento {
 
 	private final double valor;
