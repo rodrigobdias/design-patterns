@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.design.patterns.Orcamento;
-import br.com.design.patterns.chain_of_responsibility.builder.CriadorDeOrcamento;
+import br.com.design.patterns.builder.CriadorDeOrcamento;
 
 public class TesteDeDescontos {
 

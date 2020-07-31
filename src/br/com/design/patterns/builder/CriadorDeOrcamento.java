@@ -1,4 +1,4 @@
-package br.com.design.patterns.chain_of_responsibility.builder;
+package br.com.design.patterns.builder;
 
 import br.com.design.patterns.Item;
 import br.com.design.patterns.Orcamento;
