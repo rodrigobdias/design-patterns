@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import br.com.design.patterns.Imposto;
 import br.com.design.patterns.Orcamento;
+import br.com.design.patterns.builder.CriadorDeOrcamento;
 import br.com.design.patterns.strategy.ICMS;
 import br.com.design.patterns.strategy.ISS;
 
@@ -15,8 +16,8 @@ public class TesteDeImpostosComplexos {
 	private Orcamento orcamento;
 
 	@Before
-	public void criaDescontos() {
-		this.orcamento = new Orcamento(500.0);
+	public void criaOrcamentos() {
+		this.orcamento = new CriadorDeOrcamento().valor(500.0).build();
 	}
 	
 	@Test
