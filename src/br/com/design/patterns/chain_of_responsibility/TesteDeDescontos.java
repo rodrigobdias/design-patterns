@@ -1,54 +1,80 @@
 package br.com.design.patterns.chain_of_responsibility;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import br.com.design.patterns.Item;
 import br.com.design.patterns.Orcamento;
+import br.com.design.patterns.chain_of_responsibility.builder.CriadorDeOrcamento;
 
 public class TesteDeDescontos {
-	
-	@Test
-	public void main() {
-		
-		CalculadorDeDescontos descontos = new CalculadorDeDescontos();
-		
-		Orcamento orcamento1 = new Orcamento(500.0);
-		orcamento1.adicionaItem(new Item("CANETA", 250.0));
-		orcamento1.adicionaItem(new Item("LAPIS", 250.0));
-		orcamento1.adicionaItem(new Item("BORRACHA", 50.0));
-		orcamento1.adicionaItem(new Item("APONTADOR", 25.0));
-		orcamento1.adicionaItem(new Item("CADERNO", 250.0));
-		orcamento1.adicionaItem(new Item("REGUA", 200.0));
-		
-		Orcamento orcamento2 = new Orcamento(800.0);
-		orcamento2.adicionaItem(new Item("CANETA", 250.0));
-		orcamento2.adicionaItem(new Item("LAPIS", 250.0));
-		
-		Orcamento orcamento3 = new Orcamento(400.0);
-		orcamento3.adicionaItem(new Item("CANETA", 250.0));
-		orcamento3.adicionaItem(new Item("LAPIS", 250.0));
-				
-		double calculoEsperadoDescontoPorCincoItens = 50.0;
-		double calculoEsperadoDescontoPorMaisDeQuinhentosReais = 56.0;
-		double calculoEsperadoSemDesconto = 0.0;
-		
-		// Calculando DescontoPorCincoItens
-		double descontoPorCincoItens = descontos.calcula(orcamento1);
-		
-		// Calculando DescontoPorMaisDeQuinhentosReais
-		double descontoPorMaisDeQuinhentosReais = descontos.calcula(orcamento2);
-		
-		// Calculando SemDesconto
-		double semDesconto = descontos.calcula(orcamento3);
-		
-		System.out.println("DescontoPorCincoItens: " + descontoPorCincoItens);
-		System.out.println("DescontoPorMaisDeQuinhentosReais: " + descontoPorMaisDeQuinhentosReais);
-		System.out.println("SemDesconto: " + semDesconto);
-		
-		Assert.assertEquals(calculoEsperadoDescontoPorCincoItens, descontoPorCincoItens, 0.00000000000001);
-		Assert.assertEquals(calculoEsperadoDescontoPorMaisDeQuinhentosReais, descontoPorMaisDeQuinhentosReais, 0.00000000000001);
-		Assert.assertEquals(calculoEsperadoSemDesconto, semDesconto, 0.00000000000001);
-		
+
+	private CalculadorDeDescontos descontos;
+
+	@Before
+	public void criaDescontos() {
+		this.descontos = new CalculadorDeDescontos();
 	}
+
+	@Test
+	public void calculoDescontoPorCincoItens() {
+		
+		Orcamento orcamento = new CriadorDeOrcamento().valor(500.0)
+				.item("CANETA", 250.0)
+				.item("LAPIS", 250.0)
+				.item("BORRACHA", 50.0)
+				.item("APONTADOR", 25.0)
+				.item("CADERNO", 250.0)
+				.item("REGUA", 200.0)
+				.build();
+		
+		double calculoEsperadoDescontoPorCincoItens = 50.0;
+
+		// Calculando DescontoPorCincoItens
+		double descontoPorCincoItens = descontos.calcula(orcamento);
+
+		System.out.println("DescontoPorCincoItens: " + descontoPorCincoItens);
+
+		Assert.assertEquals(calculoEsperadoDescontoPorCincoItens, descontoPorCincoItens, 0.00000000000001);
+
+	}
+
+	@Test
+	public void calculoDescontoPorMaisDeQuinhentosReais() {
+
+		Orcamento orcamento = new CriadorDeOrcamento().valor(800.0)
+				.item("CANETA", 250.0)
+				.item("LAPIS", 250.0)
+				.build();
+		
+		double calculoEsperadoDescontoPorMaisDeQuinhentosReais = 56.0;
+
+		// Calculando DescontoPorMaisDeQuinhentosReais
+		double descontoPorMaisDeQuinhentosReais = descontos.calcula(orcamento);
+
+		System.out.println("DescontoPorMaisDeQuinhentosReais: " + descontoPorMaisDeQuinhentosReais);
+
+		Assert.assertEquals(calculoEsperadoDescontoPorMaisDeQuinhentosReais, descontoPorMaisDeQuinhentosReais,
+				0.00000000000001);
+
+	}
+
+	@Test
+	public void calculoSemDesconto() {
+
+		Orcamento orcamento = new CriadorDeOrcamento().valor(400.0)
+				.item("CANETA", 250.0)
+				.item("LAPIS", 250.0)
+				.build();
+		
+		double calculoEsperadoSemDesconto = 0.0;
+
+		// calculando SemDesconto
+		double semDesconto = descontos.calcula(orcamento);
+
+		System.out.println("SemDesconto: " + semDesconto);
+
+		Assert.assertEquals(calculoEsperadoSemDesconto, semDesconto, 0.00000000000001);
+	}
+
 }
