@@ -1,62 +1,93 @@
 package br.com.design.patterns.template_method;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import br.com.design.patterns.Item;
 import br.com.design.patterns.Orcamento;
+import br.com.design.patterns.builder.CriadorDeOrcamento;
 
 public class TesteDeImpostoCondicional {
 
+	
+	private ICPP icpp;
+	private IKCV ikcv;
+
+	@Before
+	public void criaDescontos() {
+		this.icpp = new ICPP();
+		this.ikcv = new IKCV();
+	}
+	
 	@Test
-	public void main() {
-		
-		ICPP icpp = new ICPP();
-		IKCV ikcv = new IKCV();
-		
-		Orcamento orcamento1 = new Orcamento(500.0);
-		orcamento1.adicionaItem(new Item("CANETA", 250.0));
-		orcamento1.adicionaItem(new Item("LAPIS", 250.0));
-		
-		Orcamento orcamento2 = new Orcamento(800.0);
-		orcamento2.adicionaItem(new Item("CANETA", 250.0));
-		orcamento2.adicionaItem(new Item("LAPIS", 250.0));
-		
-		Orcamento orcamento3 = new Orcamento(100.0);
-		orcamento3.adicionaItem(new Item("CANETA", 20.0));
-		orcamento3.adicionaItem(new Item("LAPIS", 200.0));
-		
-		Orcamento orcamento4 = new Orcamento(1000.0);
-		orcamento4.adicionaItem(new Item("CANETA", 20.0));
-		orcamento4.adicionaItem(new Item("LAPIS", 200.0));
-				
+	public void testeICPPMinimaTaxacao() {
+
+		Orcamento orcamento = new CriadorDeOrcamento().valor(500.0)
+				.item("CANETA", 250.0)
+				.item("LAPIS", 250.0)
+				.build();
+
 		double calculoEsperadoICPPMinimaTaxacao = 25.0;
-		double calculoEsperadoICPPMaximaTaxacao = 56.0;
-		
-		double calculoEsperadoIKCVMinimaTaxacao = 6.0;
-		double calculoEsperadoIKCVMaximaTaxacao = 100.0;
-		
+
 		// Calculando ICPPMinimaTaxacao
-		double impostoICPPMinimaTaxacao = icpp.calcula(orcamento1);
-		
-		// Calculando ICPPMaximaTaxacao
-		double impostoICPPMaximaTaxacao = icpp.calcula(orcamento2);
-		
-		// Calculando IKCVMinimaTaxacao
-		double impostoIKCVMinimaTaxacao = ikcv.calcula(orcamento3);
-		
-		// Calculando IKCVMaximaTaxacao
-		double impostoIKCVMaximaTaxacao = ikcv.calcula(orcamento4);
-		
+		double impostoICPPMinimaTaxacao = icpp.calcula(orcamento);
+
 		System.out.println("impostoICPPMinimaTaxacao: " + impostoICPPMinimaTaxacao);
-		System.out.println("impostoICPPMaximaTaxacao: " + impostoICPPMaximaTaxacao);
-		System.out.println("impostoIKCVMinimaTaxacao: " + impostoIKCVMinimaTaxacao);
-		System.out.println("impostoIKCVMaximaTaxacao: " + impostoIKCVMaximaTaxacao);
-		
+
 		Assert.assertEquals(calculoEsperadoICPPMinimaTaxacao, impostoICPPMinimaTaxacao, 0.00000000000001);
+	}
+
+	@Test
+	public void testeICPPMaximaTaxacao() {
+
+		Orcamento orcamento = new CriadorDeOrcamento().valor(800.0)
+				.item("CANETA", 250.0)
+				.item("LAPIS", 250.0)
+				.build();
+
+		double calculoEsperadoICPPMaximaTaxacao = 56.0;
+
+		// Calculando ICPPMaximaTaxacao
+		double impostoICPPMaximaTaxacao = icpp.calcula(orcamento);
+
+		System.out.println("impostoICPPMaximaTaxacao: " + impostoICPPMaximaTaxacao);
+
 		Assert.assertEquals(calculoEsperadoICPPMaximaTaxacao, impostoICPPMaximaTaxacao, 0.00000000000001);
+	}
+
+	@Test
+	public void testeIKCVMinimaTaxacao() {
+
+		Orcamento orcamento = new CriadorDeOrcamento().valor(100.0)
+				.item("CANETA", 20.0)
+				.item("LAPIS", 200.0)
+				.build();
+
+		double calculoEsperadoIKCVMinimaTaxacao = 6.0;
+
+		// Calculando IKCVMinimaTaxacao
+		double impostoIKCVMinimaTaxacao = ikcv.calcula(orcamento);
+
+		System.out.println("impostoIKCVMinimaTaxacao: " + impostoIKCVMinimaTaxacao);
+
 		Assert.assertEquals(calculoEsperadoIKCVMinimaTaxacao, impostoIKCVMinimaTaxacao, 0.00000000000001);
-		Assert.assertEquals(calculoEsperadoIKCVMaximaTaxacao, impostoIKCVMaximaTaxacao, 0.00000000000001);
+	}
+
+	@Test
+	public void testeIKCVMaximaTaxacao() {
+
+		Orcamento orcamento = new CriadorDeOrcamento().valor(1000.0)
+				.item("CANETA", 20.0)
+				.item("LAPIS", 200.0)
+				.build();
 		
+		double calculoEsperadoIKCVMaximaTaxacao = 100.0;
+
+		// Calculando IKCVMaximaTaxacao
+		double impostoIKCVMaximaTaxacao = ikcv.calcula(orcamento);
+
+		System.out.println("impostoIKCVMaximaTaxacao: " + impostoIKCVMaximaTaxacao);
+
+		Assert.assertEquals(calculoEsperadoIKCVMaximaTaxacao, impostoIKCVMaximaTaxacao, 0.00000000000001);
 	}
 }
