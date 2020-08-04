@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import br.com.design.patterns.Orcamento;
 import br.com.design.patterns.builder.CriadorDeOrcamento;
-import br.com.design.patterns.strategy.CalculadorDeImpostos;
 
 public class TesteDeDescontoExtra {
 
