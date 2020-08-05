@@ -4,9 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.design.patterns.CriadorDeOrcamento;
 import br.com.design.patterns.Imposto;
 import br.com.design.patterns.Orcamento;
-import br.com.design.patterns.builder.CriadorDeOrcamento;
 import br.com.design.patterns.strategy.ICMS;
 import br.com.design.patterns.strategy.ISS;
 

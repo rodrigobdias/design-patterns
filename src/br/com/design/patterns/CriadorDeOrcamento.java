@@ -1,7 +1,4 @@
-package br.com.design.patterns.builder;
-
-import br.com.design.patterns.Item;
-import br.com.design.patterns.Orcamento;
+package br.com.design.patterns;
 
 public class CriadorDeOrcamento {
 
