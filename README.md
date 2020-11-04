@@ -1,6 +1,7 @@
 # design-patterns
+=================
 
-**Curso de Design Patterns realizado pela alura que abrangem os seguintes padrões:**
+**Estudo de Design Patterns que abrangem os seguintes temas:**
 
 ```shell
 -Bridges
